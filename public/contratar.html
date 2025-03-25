@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Contratar Servidor de Minecraft - Luoda Cloud</title>
+  <style>
+
+    #backgroundVideo {
+      position: fixed;
+      right: 0;
+      bottom: 0;
+      min-width: 100%;
+      min-height: 100%;
+      z-index: -1;
+      object-fit: cover;
+    }
+
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+
+    
+    .container {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      width: 90%;
+      max-width: 450px;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    form {
+      margin-top: 20px;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+      color: #555;
+    }
+    select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #fff;
+    }
+    button {
+      margin-top: 20px;
+      padding: 12px;
+      width: 100%;
+      background-color: #4CAF50;
+      border: none;
+      border-radius: 5px;
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+
+    <video autoplay muted loop id="backgroundVideo">
+        <source src="vecteezy_3-d-illustration-of-futuristic-abstract-night-city-in-motion_2181078.mp4" type="video/mp4">
+        Tu navegador no soporta el elemento de video.
+      </video>
+
+
+  <div class="container">
+    <h1>Contratar Servidor de Minecraft</h1>
+    <form method="POST" action="/contratar-servidor">
+      <!-- En un sistema real, el userId vendría de la sesión, pero aquí se incluye un valor oculto para la demostración -->
+      <input type="hidden" name="userId" value="1">
+      
+      <label for="memoria_ram">Memoria RAM:</label>
+      <select id="memoria_ram" name="memoria_ram" required>
+        <option value="2048">2 GB (2048 MB)</option>
+        <option value="4096">4 GB (4096 MB)</option>
+        <option value="8192">8 GB (8192 MB)</option>
+        <option value="16384">16 GB (16384 MB)</option>
+      </select>
+
+      <label for="slots">Número de slots (jugadores):</label>
+      <select id="slots" name="slots" required>
+        <option value="4">4</option>
+        <option value="8">8</option>
+        <option value="12">12</option>
+        <option value="20">20</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+      </select>
+
+      <button type="submit">Contratar Servidor</button>
+    </form>
+  </div>
+</body>
+</html>
