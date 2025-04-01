@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Mis Servidores Contratados</title>
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    table, th, td {
+      border: 1px solid #ddd;
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    .no-servers {
+      text-align: center;
+      font-size: 18px;
+      color: #888;
+      margin-top: 20px;
+    }
+
+    .back-link {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .back-link a {
+      color: #4CAF50;
+      text-decoration: none;
+      font-size: 16px;
+      border: 1px solid #4CAF50;
+      padding: 10px 20px;
+      border-radius: 5px;
+      background-color: white;
+    }
+
+    .back-link a:hover {
+      background-color: #4CAF50;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Mis Servidores Contratados</h1>
+
+  <% if (servidores.length === 0) { %>
+    <p class="no-servers">No tienes servidores contratados aún.</p>
+  <% } else { %>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Memoria RAM</th>
+          <th>Slots</th>
+          <th>Estado</th>
+          <th>Fecha de Creación</th>
+          <th>Tu dirección</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% servidores.forEach(serv => { %>
+          <tr>
+            <td><%= serv.id %></td>
+            <td><%= serv.memoria_ram %> MB</td>
+            <td><%= serv.slots %> jugadores</td>
+            <td><%= serv.estado %></td>
+            <td><%= new Date(serv.fecha_creacion).toLocaleString() %></td>
+            <td>luodacloud.com:<%= serv.puerto %></td>
+            <td>
+              <a href="/detalles/<%= serv.id %>">Ver detalles</a>
+            </td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  <% } %>
+
+  <div class="back-link">
+    <a href="/contratar.html">Volver a contratar servidor</a>
+  </div>
+
+</body>
+</html>

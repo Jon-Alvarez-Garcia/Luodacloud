@@ -15,6 +15,35 @@
       object-fit: cover;
     }
 
+    #botonServer{
+      
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px;
+      width: 100%; /* Ajusta el ancho para que sea más pequeño */
+      background-color: #4CAF50;
+      border: none;
+      border-radius: 5px; /* Hace el botón circular */
+      color: white;
+      font-size: 16px;
+      text-align: center;
+      line-height: 36px; /* Centra el texto verticalmente */
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      text-decoration: none;
+    }
+
+
+    #cabeza{
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f5f5f5;
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      margin-right: 10px;
+      z-index: 10;
+    }
+
 
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -83,6 +112,15 @@
         Tu navegador no soporta el elemento de video.
       </video>
 
+
+  <div id="cabeza">
+
+    <!-- Botón para redirigir a la vista de servidores contratados -->
+<br>
+<button onclick="window.location.href='/miserver.html'">Ver servidores contratados</button>
+
+
+  </div>
 
   <div class="container">
     <h1>Contratar Servidor de Minecraft</h1>

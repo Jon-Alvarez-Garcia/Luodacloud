@@ -3,6 +3,7 @@ const mysql = require('mysql2');
 const bodyParser = require('body-parser');
 const {exec} = require('child_process');
 const session = require('express-session');
+const path = require('path');
 
 
 const app = express();
@@ -25,13 +26,15 @@ app.use(session({
 
 // Configuración de la conexión a MySQL
 const pool = mysql.createPool({
-  connectionLimit: 10,
+  connectionLimit: 30,
   host: 'localhost',
   user: 'root',
-  password: '1234',  // Reemplaza 'tu_contraseña' con tu contraseña real
+  password: 'Alemcraft-34',  // Reemplaza 'tu_contraseña' con tu contraseña real
   database: 'luodacloud'
 });
 
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
 
 
 // Función para crear un servidor de Minecraft usando Docker
@@ -44,7 +47,7 @@ function crearServidorMinecraft(memoria_ram, slots, servidorId, puerto) {
   }
 
   // Crear el comando Docker con un puerto válido
-  const comando = `docker run -d -e EULA=TRUE -e MEMORY=${memoria_ram}M -e SERVER_PORT=${puerto} -p ${puerto}:${puerto} --name minecraft_server_${servidorId} itzg/minecraft-server`;
+  const comando = `docker run -d -e EULA=TRUE -e MAX_PLAYERS=${slots} -e MEMORY=${memoria_ram}M -e SERVER_PORT=${puerto} -p ${puerto}:${puerto} --name minecraft_server_${servidorId} itzg/minecraft-server`;
 
   exec(comando, (error, stdout, stderr) => {
     if (error) {
@@ -55,7 +58,7 @@ function crearServidorMinecraft(memoria_ram, slots, servidorId, puerto) {
     console.error(`stderr: ${stderr}`);
     
     // Cambiar el estado del servidor a 'activo' en la base de datos
-    pool.query('UPDATE servidores SET estado = ? WHERE id = ?', ['activo', servidorId], (error, results) => {
+    pool.query('UPDATE servidores SET estado = ? , puerto = ? WHERE id = ?', ['activo', puerto , servidorId], (error, results) => {
       if (error) {
         console.error(error);
       } else {
@@ -84,7 +87,7 @@ function verificarServidoresPendientes() {
         
         if (activeResults.length === 0) {
           // Si el servidor está pendiente y no activo, creamos el contenedor con un puerto dinámico
-          const puerto = 25565 + servidor.id;  // Asigna un puerto único basado en el servidor_id
+          const puerto = 25565 + servidor.id; // Asigna un puerto único basado en el servidor_id
           if (puerto && !isNaN(puerto)) {  // Verifica que el puerto sea un número válido
             crearServidorMinecraft(servidor.memoria_ram, servidor.slots, servidor.id, puerto);
           } else {
@@ -96,32 +99,37 @@ function verificarServidoresPendientes() {
   });
 }
 
+//function cambiarEstadoServer(){}
+
+
+
 
 setInterval(verificarServidoresPendientes, 10000);
-
+//setInterval(cambiarEstadoServer , 150000);
 
 
 
 
 // Endpoint para registrar un usuario
 app.post('/register', (req, res) => {
-  const { nombre, email, password } = req.body;
+  const {username, nombre, email, password } = req.body;
 
   if (!nombre || !email || !password) {
     return res.status(400).json({ error: 'Faltan campos requeridos' });
   }
 
   // Nota: En producción, nunca almacenes la contraseña en texto plano. Utiliza hashing (bcrypt, etc.).
-  const query = 'INSERT INTO usuarios (nombre, email, password_hash) VALUES (?, ?, ?)';
-  pool.query(query, [nombre, email, password], (error, results) => {
+  const query = 'INSERT INTO usuarios (username , nombre, email, password_hash) VALUES (?, ?, ?, ?)';
+  pool.query(query, [username ,nombre, email, password], (error, results) => {
     if (error) {
       console.error(error);
       return res.status(500).json({ error: 'Error al registrar el usuario' });
     }
-    res.json({ mensaje: 'Usuario registrado correctamente' });
+    res.redirect('index.html');
   });
 });
 
+// Endpoint para logear un usuario
 app.post('/login', (req, res) => {
     const { nombre, password } = req.body;
     
@@ -130,7 +138,7 @@ app.post('/login', (req, res) => {
     }
     
     // Consulta en la BBDD para verificar el usuario
-    const query = 'SELECT * FROM usuarios WHERE nombre = ?';
+    const query = 'SELECT * FROM usuarios WHERE username = ?';
     pool.query(query, [nombre], (error, results) => {
       if (error) {
         console.error(error);
@@ -156,7 +164,7 @@ app.post('/login', (req, res) => {
   
 
   // Endpoint para contratar un servidor de Minecraft
-  app.post('/contratar-servidor', (req, res) => {
+app.post('/contratar-servidor', (req, res) => {
     const userId = req.session.userId; // Obtener el userId de la sesión
     const { memoria_ram, slots } = req.body;
   
@@ -173,12 +181,27 @@ app.post('/login', (req, res) => {
         console.error(error);
         return res.status(500).json({ error: 'Error al contratar el servidor' });
       }
-      res.json({ mensaje: 'Servidor contratado correctamente', servidorId: results.insertId });
+      res.redirect('/miserver.html');
     });
 });
 
-  
+app.get('/miserver.html', (req, res) => {
+  const userId = req.session.userId;  // Asegúrate de que el userId esté disponible en la sesión
+  if (!userId) {
+    return res.redirect('/login');  // Redirige si no hay sesión activa
+  }
 
+  // Consulta a la base de datos para obtener los servidores del usuario
+  const query = 'SELECT * FROM servidores WHERE usuario_id = ?';
+  pool.query(query, [userId], (error, results) => {
+    if (error) {
+      console.error(error);
+      return res.status(500).json({ error: 'Error al obtener los servidores' });
+    }
+
+    res.render('miserver', { servidores: results });
+  });
+});
 // Levantar el servidor
 app.listen(PORT, () => {
   console.log(`Servidor en ejecución en http://localhost:${PORT}`);
