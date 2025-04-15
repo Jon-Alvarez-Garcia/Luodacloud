@@ -29,7 +29,7 @@ const pool = mysql.createPool({
   connectionLimit: 30,
   host: 'localhost',
   user: 'root',
-  password: 'Alemcraft-34',  // Reemplaza 'tu_contraseña' con tu contraseña real
+  password: '1234',  // Reemplaza 'tu_contraseña' con tu contraseña real
   database: 'luodacloud'
 });
 
