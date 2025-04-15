@@ -1,0 +1,155 @@
+/* ===== Minecraft + Profesional ===== */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+/* Aplica la fuente a todo el body */
+body {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 14px; /* Ajusta según tu preferencia */
+  background-color: #1f1f1f;
+  color: #eee;
+  margin: 0;
+  padding: 0;
+}
+
+
+/* Video de fondo */
+#backgroundVideo {
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    min-height: 100%;
+    object-fit: cover;
+    z-index: -1; /* para estar detrás de todo */
+}
+
+/* Contenedor principal para formularios, secciones, etc. */
+.container {
+    background-color: rgba(34, 34, 34, 0.9);
+    border: 3px solid #6fa36f;  /* Borde verde con aire “Minecraft” */
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+    width: 90%;
+    max-width: 500px;
+    margin: 30px auto;
+}
+
+.back-link {
+    text-align: center; /* Centra horizontalmente el contenido */
+    margin-top: 20px;   /* Espacio arriba */
+}
+
+/* Convierte el enlace en un botón */
+.back-link a {
+    display: inline-block;   /* Para que respete ancho y alto */
+    padding: 12px 20px;      /* Espacio interno del botón */
+    background-color: #4CAF50;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background 0.3s;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #fff;
+}
+
+.back-link a:hover {
+    background-color: #45a049; /* Hover más oscuro */
+}
+
+/* Títulos con color principal verde-limón */
+h1, h2 {
+    text-align: center;
+    color: #b5e853;
+    text-shadow: 1px 1px 2px #000; /* Toque de relieve */
+    margin-top: 0;
+}
+
+/* Inputs y selects con fondos oscuros */
+input, select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 2px solid #333;
+    border-radius: 5px;
+    background-color: #444;
+    color: #fff;
+    box-sizing: border-box;
+}
+
+/* Fuerza la misma fuente pixelada en elementos de formulario */
+input, select, textarea, button {
+    font-family: 'Press Start 2P', cursive; 
+}
+
+/* Botones y links con estilo de botón */
+button, a.btn {
+    display: inline-block;
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+}
+
+button:hover, a.btn:hover {
+    background-color: #45a049;
+}
+
+/* ===== Tabla de servidores ===== */
+table {
+    width: 80%;
+    border-collapse: collapse;
+    margin: 20px auto;
+    background-color: rgba(51, 51, 51, 0.95);
+    color: #ddd;
+}
+table, th, td {
+    border: 1px solid #555;
+}
+th {
+    background-color: #4CAF50;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+td, th {
+    padding: 12px;
+    text-align: center;
+}
+
+table td a {
+    color: #79ff13;          /* Mismo color que el texto general de la tabla */
+    text-decoration: none; /* Opcional: quita el subrayado */
+  }
+  
+  table td a:hover {
+    color: #5df400;          /* Opcional: un color distinto al pasar el ratón */
+  }
+  
+
+/* Otros detalles (back-link) */
+.back-link a {
+    color: #b5e853;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+.back-link a:hover {
+    color: #fff;
+}
+
+/* 
+   Clase opcional para un logo o imagen adicional
+   .logo {
+     display: block;
+     max-width: 150px;
+     margin: 20px auto;
+   }
+*/

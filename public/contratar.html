@@ -3,116 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <title>Contratar Servidor de Minecraft - Luoda Cloud</title>
+  
+  <link rel="stylesheet" href="/styles/style.css">
   <style>
-
-    #backgroundVideo {
-      position: fixed;
-      right: 0;
-      bottom: 0;
-      min-width: 100%;
-      min-height: 100%;
-      z-index: -1;
-      object-fit: cover;
+    #cabeza 
+    {
+    text-align: center;
     }
 
-    #botonServer{
-      
-      display: inline-block;
-      margin-top: 20px;
-      padding: 12px;
-      width: 100%; /* Ajusta el ancho para que sea más pequeño */
-      background-color: #4CAF50;
-      border: none;
-      border-radius: 5px; /* Hace el botón circular */
-      color: white;
-      font-size: 16px;
-      text-align: center;
-      line-height: 36px; /* Centra el texto verticalmente */
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-      text-decoration: none;
-    }
-
-
-    #cabeza{
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f5f5f5;
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      margin-right: 10px;
-      z-index: 10;
-    }
-
-
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f5f5f5;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-
-
-    
-    .container {
-      background-color: #fff;
-      border: 1px solid #ddd;
-      border-radius: 10px;
-      padding: 30px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-      width: 90%;
-      max-width: 450px;
-    }
-    h1 {
-      text-align: center;
-      color: #333;
-    }
-    form {
-      margin-top: 20px;
-    }
-    label {
-      display: block;
-      margin-top: 15px;
-      font-weight: bold;
-      color: #555;
-    }
-    select {
-      width: 100%;
-      padding: 10px;
-      margin-top: 5px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      background-color: #fff;
-    }
-    button {
-      margin-top: 20px;
-      padding: 12px;
-      width: 100%;
-      background-color: #4CAF50;
-      border: none;
-      border-radius: 5px;
-      color: #fff;
-      font-size: 16px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-    button:hover {
-      background-color: #45a049;
-    }
   </style>
+
+
 </head>
 <body>
 
-    <video autoplay muted loop id="backgroundVideo">
-        <source src="vecteezy_3-d-illustration-of-futuristic-abstract-night-city-in-motion_2181078.mp4" type="video/mp4">
-        Tu navegador no soporta el elemento de video.
-      </video>
-
-
+  
   <div id="cabeza">
 
     <!-- Botón para redirigir a la vista de servidores contratados -->
@@ -149,5 +54,13 @@
       <button type="submit">Contratar Servidor</button>
     </form>
   </div>
+
+  <video autoplay muted loop id="backgroundVideo">
+    <source src="/videos/videoplayback.mp4" type="video/mp4">
+    Tu navegador no soporta el elemento de video.
+  </video>
+  
+
+
 </body>
 </html>
