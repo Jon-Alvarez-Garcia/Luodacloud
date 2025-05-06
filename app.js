@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const {exec} = require('child_process');
 const session = require('express-session');
 const path = require('path');
+const fs = require('fs');
 
 
 const app = express();
@@ -29,7 +30,7 @@ const pool = mysql.createPool({
   connectionLimit: 30,
   host: 'localhost',
   user: 'root',
-  password: '1234',  // Reemplaza 'tu_contraseña' con tu contraseña real
+  password: 'Alemcraft-34',  // Reemplaza 'tu_contraseña' con tu contraseña real
   database: 'luodacloud'
 });
 
@@ -203,6 +204,74 @@ app.get('/miserver.html', (req, res) => {
   });
 });
 // Levantar el servidor
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`Servidor en ejecución en http://localhost:${PORT}`);
 });
+// Función para obtener el rendimiento de Docker
+function getDockerStats() {
+  return new Promise((resolve, reject) => {
+      exec('docker stats --no-stream --format "{{.Name}}: {{.CPUPerc}}, {{.MemUsage}}, {{.MemPerc}}, {{.NetIO}}"', (error, stdout, stderr) => {
+          if (error) {
+              reject(`Error al obtener stats de Docker: ${error.message}`);
+          }
+          if (stderr) {
+              reject(`stderr: ${stderr}`);
+          }
+          resolve(stdout);
+      });
+  });
+}
+
+// Función para guardar los datos en un archivo
+function saveStatsToFile(stats) {
+  const timestamp = new Date().toISOString();
+  const dataToSave = `${timestamp}\n${stats}\n`;
+
+  // Verificar si el archivo existe
+  fs.exists('docker_stats.txt', (exists) => {
+      if (!exists) {
+          // Si el archivo no existe, lo crea vacío
+          fs.writeFile('docker_stats.txt', '', (err) => {
+              if (err) throw err;
+              console.log('Archivo docker_stats.txt creado');
+          });
+      }
+
+      // Leer el archivo actual y agregar nuevo contenido
+      fs.readFile('docker_stats.txt', 'utf8', (err, data) => {
+          if (err) throw err;
+
+          // Dividir los datos en líneas
+          let lines = data.split('\n').filter(line => line.trim() !== '');
+
+          // Agregar el nuevo dato
+          lines.push(dataToSave);
+
+          // Limitar a 50 líneas
+          if (lines.length > 50) {
+              lines.shift();  // Eliminar la línea más antigua
+          }
+
+          // Guardar los datos actualizados en el archivo
+          fs.writeFile('docker_stats.txt', lines.join('\n'), (err) => {
+              if (err) throw err;
+              console.log('Datos guardados en docker_stats.txt');
+          });
+      });
+  });
+}
+
+// Función principal que obtiene los datos y los guarda cada intervalo
+function recordStatsPeriodically(intervalMs) {
+  setInterval(async () => {
+      try {
+          const stats = await getDockerStats();
+          saveStatsToFile(stats);
+      } catch (error) {
+          console.error('Error al obtener los datos de Docker:', error);
+      }
+  }, intervalMs);
+}
+
+// Iniciar la grabación periódica cada 2 segundos (2000 ms)
+recordStatsPeriodically(2000);
