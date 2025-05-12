@@ -1,0 +1,101 @@
+{
+	'minecraft_server_32': 
+	{
+		'name': '/minecraft_server_32', 
+		'id': '0791fc61669bc04b9a7101269f9c8bef512d5c4798ea455cc9e2d48261d1c764', 
+		'read': '2025-05-09T15:17:04.876428431Z', 
+		'preread': '2025-05-09T15:17:03.87346257Z', 
+		'pids_stats': 
+			{
+				'current': 77
+				},
+		'blkio_stats': 
+			{
+				'io_service_bytes_recursive': [], 
+				'io_serviced_recursive': [], 
+				'io_queue_recursive': [], 
+				'io_service_time_recursive': [], 
+				'io_wait_time_recursive': [], 
+				'io_merged_recursive': [], 
+				'io_time_recursive': [], 
+				'sectors_recursive': []
+				}, 
+		'num_procs': 0, 
+		'storage_stats': {}, 
+		'cpu_stats': 
+			{
+				'cpu_usage': 
+				{
+					'total_usage': 118531849700, 
+					'percpu_usage': [9146060800, 8132780300, 8753618400, 5168626500, 7808380700, 7818086200, 9097072000, 5611983000, 8799140300, 5709670300, 7906152200, 4936759700, 8564934300, 6755943600, 7383454500, 6939186900], 
+					'usage_in_kernelmode': 13040000000, 
+					'usage_in_usermode': 98260000000
+					}, 
+			'system_cpu_usage': 27861900000000, 
+			'online_cpus': 16, 
+			'throttling_data': 
+				{
+					'periods': 0, 
+					'throttled_periods': 0, 
+					'throttled_time': 0
+					}
+				}, 
+		'precpu_stats': 
+			{
+				'cpu_usage': 
+					{
+						'total_usage': 118528417800, 
+						'percpu_usage': [9144952300, 8132780300, 8753581300, 5168626500, 7808380700, 7818086200, 9097072000, 5611983000, 8799090800, 5709670300, 7906152200, 4936759700, 8562829200, 6755943600, 7383322800, 6939186900], 
+						'usage_in_kernelmode': 13040000000, 
+						'usage_in_usermode': 98260000000
+						}, 
+				'system_cpu_usage': 27845880000000, 
+				'online_cpus': 16, 
+				'throttling_data': 
+					{
+						'periods': 0, 
+						'throttled_periods': 0, 
+						'throttled_time': 0
+						}
+				}, 
+		'memory_stats': 
+			{
+				'usage': 1437540352, 
+				'max_usage': 1543307264, 
+				'stats': 
+					{
+						'active_anon': 8192, 
+						'active_file': 35594240, 
+						'cache': 44748800, 
+						'dirty': 4096, 
+						'hierarchical_memory_limit': 9223372036854771712, 
+						'hierarchical_memsw_limit': 9223372036854771712, 
+						'inactive_anon': 1384316928, 
+						'inactive_file': 9154560, 
+						'mapped_file': 30224384, 
+						'pgfault': 323863, 
+						'pgmajfault': 584, 
+						'pgpgin': 381040, 
+						'pgpgout': 249320, 
+						'rss': 1384325120, 
+						'rss_huge': 891289600, 
+						'total_active_anon': 819 
+						'limit': 8021950464
+						}, 
+				'networks': 
+					{
+						'eth0': 
+						{
+							'rx_bytes': 281301, 
+							'rx_packets': 233, 
+							'rx_errors': 0, 
+							'rx_dropped': 0, 
+							'tx_bytes': 8804, 
+							'tx_packets': 109, 
+							'tx_errors': 0, 
+							'tx_dropped': 0
+							}
+						}
+				}
+		}
+}
